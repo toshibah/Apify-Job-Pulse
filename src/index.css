@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-app-bg: var(--bg);
+  --color-app-panel: var(--panel-bg);
+  --color-app-card: var(--card-bg);
+  --color-app-border: var(--border);
+  --color-app-primary: #2563EB;
+  --color-app-accent: #84CC16;
+  --color-app-text-primary: var(--text-primary);
+  --color-app-text-secondary: var(--text-secondary);
+  --color-app-text-muted: var(--text-muted);
+}
+
+:root {
+  /* Light mode fallback - keeping it but defaulting to dark intelligence */
+  --bg: #F8FAFC;
+  --panel-bg: #F1F5F9;
+  --card-bg: #FFFFFF;
+  --border: #E2E8F0;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
+}
+
+/* Defaulting to Dark Intelligence Theme as per recommendation */
+:root, .dark {
+  --bg: #0F172A;
+  --panel-bg: #111827;
+  --card-bg: #1E293B;
+  --border: #1F2937;
+  --text-primary: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+}
+
+@layer base {
+  body {
+    @apply antialiased bg-app-bg text-app-text-primary transition-colors duration-300;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-app-panel/50 backdrop-blur-md border border-app-border;
+  }
+  
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+  
+  .glow-primary {
+    @apply shadow-[0_0_15px_rgba(37,99,235,0.3)];
+  }
+
+  .btn-primary {
+    @apply bg-app-primary text-white rounded-xl font-medium shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-95 hover:shadow-[0_0_25px_rgba(37,99,235,0.5)] flex items-center justify-center gap-2;
+  }
+  
+  .pulse-dot {
+    @apply relative flex h-2 w-2;
+  }
+  
+  .pulse-dot-inner {
+    @apply animate-ping absolute inline-flex h-full w-full rounded-full bg-app-accent opacity-75;
+  }
+  
+  .pulse-dot-center {
+    @apply relative inline-flex rounded-full h-2 w-2 bg-app-accent;
+  }
+
+  .scanline {
+    @apply pointer-events-none absolute inset-0 z-50 overflow-hidden;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+  }
+
+  .radar-grid {
+    background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .radar-sweep {
+    @apply absolute inset-0 pointer-events-none opacity-10;
+    background: conic-gradient(from 0deg at 50% 50%, var(--color-app-primary) 0deg, transparent 90deg);
+    animation: sweep 4s linear infinite;
+  }
+
+  @keyframes sweep {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}

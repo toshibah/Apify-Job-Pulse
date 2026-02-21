@@ -1,0 +1,5 @@
+{
+  "name": "JobPulse Aggregator",
+  "description": "Multi-source job board aggregator for recruiters and HR teams, pulling from LinkedIn, Indeed, and career pages using AI-powered search.",
+  "requestFramePermissions": []
+}
